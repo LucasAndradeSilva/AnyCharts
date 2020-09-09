@@ -1,0 +1,355 @@
+<html>
+    <head>
+      <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+      <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
+      <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css" type="text/css" rel="stylesheet">
+      <link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css" type="text/css" rel="stylesheet">
+      <style type="text/css">
+    
+         
+          .chart{            
+            margin: 10px 10px 0px 0px;            
+            width: 500px;
+            height: 300px;                        
+            border: 1px solid rgb(207, 205, 205);
+            padding: 5px 20px 20px 0px;
+            border-radius: 10px;
+            min-height: 110px;
+            box-shadow: 5px 10px 20px rgb(218, 216, 216);
+          }
+      
+        
+    </style>
+    </head>
+    <body>
+        
+        <div class="container mt-auto mb-auto">
+          <h2 class="text-uppercase text-center mt-3">Dashboard</h2>
+          <div class=" form-inline">
+            <div class="chart">
+              <div id="container"></div>
+            </div>
+            <div class="chart">            
+              <div id="pizza"></div>
+            </div>
+            <div class="chart">
+              <div id="line"></div>
+            </div>
+          </div>     
+        </div>
+        
+      
+      <script>
+    
+          anychart.onDocumentReady(function () {
+            // create data set on our data
+            var chartData = {
+              title: 'Top 3 Products with Region Sales Data',
+              header: ['#', 'Florida', 'Texas', 'Arizona', 'Nevada'],
+              rows: [
+                ['Nail polish', 6814, 3054, 4376, 4229],
+                ['Eyebrow pencil', 7012, 5067, 8987, 3932],
+                ['Lipstick', 8814, 9054, 4376, 9256]
+              ]
+            };
+    
+            // create column chart
+            var chart = anychart.column();
+    
+            // set chart data
+            chart.data(chartData);
+    
+            // turn on chart animation
+            chart.animation(true);
+    
+            chart.yAxis().labels().format('${%Value}{groupsSeparator: }');
+    
+            // set titles for Y-axis
+            chart.yAxis().title('Revenue');
+    
+            chart
+              .labels()
+              .enabled(true)
+              .position('center-top')
+              .anchor('center-bottom')
+              .format('${%Value}{groupsSeparator: }');
+            chart.hovered().labels(false);
+    
+            // turn on legend and tune it
+            chart.legend().enabled(true).fontSize(13).padding([0, 0, 20, 0]);
+    
+            // interactivity settings and tooltip position
+            chart.interactivity().hoverMode('single');
+    
+            chart
+              .tooltip()
+              .positionMode('point')
+              .position('center-top')
+              .anchor('center-bottom')
+              .offsetX(0)
+              .offsetY(5)
+              .titleFormat('{%X}')
+              .format('{%SeriesName} : ${%Value}{groupsSeparator: }');
+    
+            // set container id for the chart
+            chart.container('container');
+    
+            // initiate chart drawing
+            chart.draw();
+          });
+
+          anychart.onDocumentReady(function () {
+        // define sample data
+        var data = [
+          { name: 'Point 1', value: 10, group: 'stock' },
+          { name: 'Point 2', value: 30, group: 'stock' },
+          { name: 'Point 3', value: 60, group: 'stock' },
+          { name: 'Point 4', value: 30, group: 'stock' },
+          { name: 'Point 5', value: 80, group: 'stock' },
+          { name: 'Point 6', value: 40, group: 'stock' },
+          { name: 'Point 7', value: 10, group: 'stock' },
+          { name: 'Point 8', value: 40, group: 'bonds' },
+          { name: 'Point 9', value: 60, group: 'bonds' },
+          { name: 'Point 10', value: 40, group: 'bonds' },
+          { name: 'Point 11', value: 10, group: 'bonds' },
+          { name: 'Point 12', value: 40, group: 'bonds' }
+        ];
+
+        // pre process data points, to define indexes groups and set color from palette
+        var groupsPalette = ['#003268', '#0E3119'];
+        var dataPointsCount = data.length;
+        var groupsMap = {};
+        var groupsIndex = 0;
+        var explodedGroupName;
+
+        for (var i = 0; i < dataPointsCount; i++) {
+          var point = data[i];
+          var groupName = point.group;
+          var group = groupsMap[groupName];
+
+          if (!group) {
+            group = {};
+            group.index = groupsIndex;
+            group.sum = 0;
+            group.palette = anychart.palettes.distinctColors(
+              anychart.color.singleHueProgression(
+                groupsPalette[groupsIndex],
+                dataPointsCount
+              )
+            );
+            group.lastPointIndex = -1;
+            group.indexes = [];
+            groupsMap[groupName] = group;
+            groupsIndex++;
+          }
+          group.lastPointIndex++;
+          group.sum += point.value;
+          var groupPalette = group.palette;
+          var lastPointIndex = group.lastPointIndex;
+          var groupIndexes = group.indexes;
+          groupIndexes.push(i);
+
+          point.fill = groupPalette.itemAt(lastPointIndex);
+          point.stroke = groupPalette.itemAt(lastPointIndex);
+        }
+
+        // create pie chart with passed data
+        var chart = anychart.pie(data);
+
+        // set chart title text settings
+        chart
+          .title('Donut chart with grouped points\nand custom interactivity')
+          .interactivity('single')
+          // disable chart legend
+          .legend(false)
+          // set chart radius
+          .radius('43%')
+          .labels(false)
+          // create empty area in pie chart
+          .innerRadius('70%');
+
+        createChartLabel(chart, 0, 'right-top', 'bonds');
+        createChartLabel(chart, 1, 'left-top', 'stock');
+
+        // set container id for the chart
+        chart.container('pizza');
+        // initiate chart drawing
+        chart.draw();
+
+        chart.listen('pointMouseOver', function (evt) {
+          var pointIndex = evt.pointIndex;
+          var groupName = chart.data().get(pointIndex, 'group');
+          var group = groupsMap[groupName];
+          var groupIndexes = group.indexes;
+
+          chart.unhover();
+          chart.hover(groupIndexes);
+        });
+
+        chart.listen('pointMouseOut', function () {
+          chart.unhover();
+        });
+
+        function createChartLabel(chart, index, anchor, groupName) {
+          var label = chart.label(index);
+          label
+            .position('center')
+            .anchor(anchor)
+            .offsetY(0)
+            .offsetX(10)
+            .hAlign('center')
+            .useHtml(true)
+            .text(
+              '<span style="font-size: 28px; color: ">' +
+                groupsMap[groupName].sum +
+                '</span><br><span style="font-size: 9px; font-weight: bold">' +
+                groupName.toUpperCase() +
+                '</span>'
+            );
+
+          label.listen('mouseOver', function () {
+            document.body.style.cursor = 'pointer';
+            var group = groupsMap[groupName];
+            var groupIndexes = group.indexes;
+
+            chart.unhover();
+            chart.hover(groupIndexes);
+          });
+
+          label.listen('mouseOut', function () {
+            document.body.style.cursor = '';
+            chart.unhover();
+          });
+
+          label.listen('mouseDown', function () {
+            var group = groupsMap[groupName];
+
+            if (explodedGroupName === groupName) {
+              chart.unselect();
+              explodedGroupName = '';
+            } else {
+              var groupIndexes = group.indexes;
+              explodedGroupName = groupName;
+              chart.select(false);
+              chart.select(groupIndexes, true);
+            }
+          });
+        }
+      });
+                
+      anychart.onDocumentReady(function () {
+        // create data set on our data
+        var dataSet = anychart.data.set(getData());
+
+        // map data for the first series, take x from the zero column and value from the first column of data set
+        var firstSeriesData = dataSet.mapAs({ x: 0, value: 1 });
+
+        // map data for the second series, take x from the zero column and value from the second column of data set
+        var secondSeriesData = dataSet.mapAs({ x: 0, value: 2 });
+
+        // map data for the third series, take x from the zero column and value from the third column of data set
+        var thirdSeriesData = dataSet.mapAs({ x: 0, value: 3 });
+
+        // create line chart
+        var chart = anychart.line();
+
+        // turn on chart animation
+        chart.animation(true);
+
+        // set chart padding
+        chart.padding([10, 20, 5, 20]);
+
+        // turn on the crosshair
+        chart.crosshair().enabled(true).yLabel(false).yStroke(null);
+
+        // set tooltip mode to point
+        chart.tooltip().positionMode('point');
+
+        // set chart title text settings
+        chart.title(
+          'Trend of Sales of the Most Popular Products of ACME Corp.'
+        );
+
+        // set yAxis title
+        chart.yAxis().title('Number of Bottles Sold (thousands)');
+        chart.xAxis().labels().padding(5);
+
+        // create first series with mapped data
+        var firstSeries = chart.line(firstSeriesData);
+        firstSeries.name('Brandy');
+        firstSeries.hovered().markers().enabled(true).type('circle').size(4);
+        firstSeries
+          .tooltip()
+          .position('right')
+          .anchor('left-center')
+          .offsetX(5)
+          .offsetY(5);
+
+        // create second series with mapped data
+        var secondSeries = chart.line(secondSeriesData);
+        secondSeries.name('Whiskey');
+        secondSeries.hovered().markers().enabled(true).type('circle').size(4);
+        secondSeries
+          .tooltip()
+          .position('right')
+          .anchor('left-center')
+          .offsetX(5)
+          .offsetY(5);
+
+        // create third series with mapped data
+        var thirdSeries = chart.line(thirdSeriesData);
+        thirdSeries.name('Tequila');
+        thirdSeries.hovered().markers().enabled(true).type('circle').size(4);
+        thirdSeries
+          .tooltip()
+          .position('right')
+          .anchor('left-center')
+          .offsetX(5)
+          .offsetY(5);
+
+        // turn the legend on
+        chart.legend().enabled(true).fontSize(13).padding([0, 0, 10, 0]);
+
+        // set container id for the chart
+        chart.container('line');
+        // initiate chart drawing
+        chart.draw();
+      });
+
+      function getData() {
+        return [
+          ['1986', 3.6, 2.3, 2.8, 11.5],
+          ['1987', 7.1, 4.0, 4.1, 14.1],
+          ['1988', 8.5, 6.2, 5.1, 17.5],
+          ['1989', 9.2, 11.8, 6.5, 18.9],
+          ['1990', 10.1, 13.0, 12.5, 20.8],
+          ['1991', 11.6, 13.9, 18.0, 22.9],
+          ['1992', 16.4, 18.0, 21.0, 25.2],
+          ['1993', 18.0, 23.3, 20.3, 27.0],
+          ['1994', 13.2, 24.7, 19.2, 26.5],
+          ['1995', 12.0, 18.0, 14.4, 25.3],
+          ['1996', 3.2, 15.1, 9.2, 23.4],
+          ['1997', 4.1, 11.3, 5.9, 19.5],
+          ['1998', 6.3, 14.2, 5.2, 17.8],
+          ['1999', 9.4, 13.7, 4.7, 16.2],
+          ['2000', 11.5, 9.9, 4.2, 15.4],
+          ['2001', 13.5, 12.1, 1.2, 14.0],
+          ['2002', 14.8, 13.5, 5.4, 12.5],
+          ['2003', 16.6, 15.1, 6.3, 10.8],
+          ['2004', 18.1, 17.9, 8.9, 8.9],
+          ['2005', 17.0, 18.9, 10.1, 8.0],
+          ['2006', 16.6, 20.3, 11.5, 6.2],
+          ['2007', 14.1, 20.7, 12.2, 5.1],
+          ['2008', 15.7, 21.6, 10, 3.7],
+          ['2009', 12.0, 22.5, 8.9, 1.5]
+        ];
+      }
+    
+    </script>
+    </body>
+    </html>
+                    
