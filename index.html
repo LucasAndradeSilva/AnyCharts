@@ -2,7 +2,7 @@
     <head>
       <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
       <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
-      <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
+      <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>      
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -13,39 +13,224 @@
          
           .chart{            
             margin: 10px 10px 0px 0px;            
-            width: 500px;
+            width: 100%;
             height: 300px;                        
-            border: 1px solid rgb(207, 205, 205);
-            padding: 5px 20px 20px 0px;
-            border-radius: 10px;
-            min-height: 110px;
-            box-shadow: 5px 10px 20px rgb(218, 216, 216);
+            border: 1px solid rgb(207, 205, 205);                     
+            min-height: 110px;      
+            padding: 0px;
+            background: #FFFFFF;            
+            box-sizing: border-box;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1), inset 0px 4px 20px rgba(0, 0, 0, 0.05);
+            border-radius: 20px;     
           }
       
-        
+          .topo {              
+              color: #fff;
+              padding: 5px;
+              margin: 0;
+              font-weight: bold;
+          }
+
+          .btn-browm{
+            color: white;
+            background-color: rgb(161, 108, 43);
+          }
+
+          .fundo{
+            margin: 10px 10px 0px 0px;            
+            width: 600px;
+            height: 300px;                        
+            border: 1px solid rgb(207, 205, 205);                     
+            min-height: 110px; 
+            padding: 0px;
+            background: #FFFFFF;            
+            box-sizing: border-box;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1), inset 0px 4px 20px rgba(0, 0, 0, 0.05);
+            border-radius: 20px;    
+          }
+
+          .barra{
+            width: 450px;
+            height: 600px;         
+          }
+
+          .nave{
+           background-color: steelblue;       
+           padding: 10px;
+           color: white;           
+                  
+          }
+
+          .dados{
+            margin-top: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;                     
+            font-size: 20px;                        
+          }
+
+          .dados i{                  
+            font-size: 30px;                        
+          }
+
+          .dados label{
+            margin: 10px;            
+          }
+  
     </style>
     </head>
     <body>
         
-        <div class="container mt-auto mb-auto">
+      <div class="container">
+        <h6 class="text-uppercasetopo nave"><i class='fas fa-chart-bar'></i> Dashboard Catarinense Pharma</h2>
+          <div class="form-inline mt-2 col">
+            <div class="form-inline col-2">
+                <h6>Gerência</h6><i class='ml-5 fas fa-bars'></i>
+                <div class="w-100">
+                    <button class="btn btn-browm btn-block btn-sm">GIAN</button>
+                    <button class="btn btn-browm btn-block btn-sm">JUNIOR</button>
+                </div>
+            </div>
+
+            <div class="form-inline col-2">
+              <h6>Coodernação</h6><i class='ml-3 fas fa-bars'></i>
+              <div class="w-100">
+                  <button class="btn btn-browm btn-block btn-sm">GIAN</button>
+                  <button class="btn btn-browm btn-block btn-sm">JUNIOR</button>
+              </div>
+          </div>
+
+          <div class="form-inline col-6">
+            <h6>Consultor</h6><i class='ml-5 fas fa-bars'></i>
+            <div class="w-100 m-1">
+              <div class="">
+                <button class="btn btn-browm btn-sm w-25">GIAN</button>
+                <button class="btn btn-browm btn-sm w-25">JUNIOR</button>
+                <button class="btn btn-browm btn-sm w-25">GIAN</button>                
+              </div>
+              <div class="mt-2">
+                <button class="btn btn-browm btn-sm w-25">GIAN</button>
+                <button class="btn btn-browm btn-sm w-25">JUNIOR</button>
+                <button class="btn btn-browm btn-sm w-25">GIAN</button>                
+              </div>
+            </div>
+          </div>
+
+          <div class="form-inline col-2">
+            <h6>Gerência</h6><i class='ml-5 fas fa-bars'></i>
+            <div class="w-100">
+                <button class="btn btn-browm btn-block btn-sm">GIAN</button>
+                <button class="btn btn-browm btn-block btn-sm">JUNIOR</button>
+            </div>
+          </div>
+
+          </div>
+
+          <div class="dados ">
+            <div class="text-center">              
+              <label class="align-top"><i class="fas fa-rocket"></i> META R$ 10.279.021</label> 
+              <label><i class="fas fa-donate"></i> FAT + CARTEIRA R$ 6.070.053</label>
+              <label><i class="far fa-arrow-alt-circle-up"></i> OL R$ 1.045.0180</label>
+            </div>
+            <div class="text-center">
+              <label><i class="fas fa-donate"></i> FATURADO R$ 3.591.869</label>
+              <label><i class="fas fa-donate"></i> CARTEIRA R$ 1.433.005</label>
+            </div>
+          </div>
+
+          <div class="topo">
+
+          </div>
+          <div class="topo">
+            <div class=" form-inline">
+              <div class="chart">
+                <div id="container"></div>
+              </div>
+              <div class="chart">
+                <div id="container1"></div>
+              </div>
+              <div class="chart">
+                <div id="container2"></div>
+              </div>              
+            </div>  
+          </div>
+
+          <div class="topo mt-3 form-inline">
+            <div>
+              <div class="fundo">
+                <div id="container3"></div>
+              </div> 
+              <div class="fundo">            
+                <div id="pizza"></div>
+              </div>
+            </div>   
+            <div class="fundo barra">            
+              <div id="barra"></div>
+            </div>         
+          </div>
+         
+      </div>
+        <!-- <div class="container mt-auto mb-auto">
           <h2 class="text-uppercase text-center mt-3">Dashboard</h2>
-          <div class=" form-inline">
-            <div class="chart">
-              <div id="container"></div>
-            </div>
-            <div class="chart">            
-              <div id="pizza"></div>
-            </div>
-            <div class="chart">
-              <div id="line"></div>
-            </div>
-          </div>     
-        </div>
+            
+        </div> -->
         
       
       <script>
+         anychart.onDocumentReady(function () {
+            // create data set on our data
+            var chartData = {
+              title: 'PRODUTOS FOCO - FATURAMENTO',
+              header: ['#', 'Florida', 'Texas', 'Arizona', 'Nevada'],
+              rows: [
+                ['Nail polish', 6814],
+                ['Eyebrow pencil', 7012],               
+              ]
+            };
     
-          anychart.onDocumentReady(function () {
+            // create column chart
+            var chart = anychart.column();
+    
+            // set chart data
+            chart.data(chartData);
+    
+            // turn on chart animation
+            chart.animation(true);
+    
+            chart.yAxis().labels().format('${%Value}{groupsSeparator: }');
+    
+            // set titles for Y-axis
+            chart.yAxis().title('Revenue');
+    
+            chart
+              .labels()
+              .enabled(true)
+              .position('center-top')
+              .anchor('center-bottom')
+              .format('${%Value}{groupsSeparator: }');
+            chart.hovered().labels(false);
+    
+            // turn on legend and tune it
+            chart.legend().enabled(true).fontSize(13).padding([0, 0, 20, 0]);
+    
+            // interactivity settings and tooltip position
+            chart.interactivity().hoverMode('single');
+    
+            chart
+              .tooltip()
+              .positionMode('point')
+              .position('center-top')
+              .anchor('center-bottom')
+              .offsetX(0)
+              .offsetY(5)
+              .titleFormat('{%X}')
+              .format('{%SeriesName} : ${%Value}{groupsSeparator: }');
+    
+            // set container id for the chart
+            chart.container('container3');    
+            // initiate chart drawing
+            chart.draw();        
+          });
+         anychart.onDocumentReady(function () {
             // create data set on our data
             var chartData = {
               title: 'Top 3 Products with Region Sales Data',
@@ -96,10 +281,125 @@
               .format('{%SeriesName} : ${%Value}{groupsSeparator: }');
     
             // set container id for the chart
-            chart.container('container');
-    
+            chart.container('container2');    
             // initiate chart drawing
-            chart.draw();
+            chart.draw();        
+          });
+         anychart.onDocumentReady(function () {
+            // create data set on our data
+            var chartData = {
+              title: 'Top 3 Products with Region Sales Data',
+              header: ['#', 'Florida', 'Texas', 'Arizona', 'Nevada'],
+              rows: [
+                ['Nail polish', 6814, 3054, 4376, 4229],
+                ['Eyebrow pencil', 7012, 5067, 8987, 3932],
+                ['Lipstick', 8814, 9054, 4376, 9256]
+              ]
+            };
+    
+            // create column chart
+            var chart = anychart.column();
+    
+            // set chart data
+            chart.data(chartData);
+    
+            // turn on chart animation
+            chart.animation(true);
+    
+            chart.yAxis().labels().format('${%Value}{groupsSeparator: }');
+    
+            // set titles for Y-axis
+            chart.yAxis().title('Revenue');
+    
+            chart
+              .labels()
+              .enabled(true)
+              .position('center-top')
+              .anchor('center-bottom')
+              .format('${%Value}{groupsSeparator: }');
+            chart.hovered().labels(false);
+    
+            // turn on legend and tune it
+            chart.legend().enabled(true).fontSize(13).padding([0, 0, 20, 0]);
+    
+            // interactivity settings and tooltip position
+            chart.interactivity().hoverMode('single');
+    
+            chart
+              .tooltip()
+              .positionMode('point')
+              .position('center-top')
+              .anchor('center-bottom')
+              .offsetX(0)
+              .offsetY(5)
+              .titleFormat('{%X}')
+              .format('{%SeriesName} : ${%Value}{groupsSeparator: }');
+    
+            // set container id for the chart
+            chart.container('container1');    
+            // initiate chart drawing
+            chart.draw();        
+          });
+
+          anychart.onDocumentReady(function () {
+            // create data set on our data
+            var chartData = {
+              title: 'PRODUTOS FOCO - FATURAMENTO',
+              header: ['#', 'Florida', 'Texas', 'Arizona', 'Nevada'],
+              rows: [
+                ['Nail polish', 6814, 3054],
+                ['Eyebrow pencil', 7012, 5067],
+                ['Lipstica', 1814, 1054],
+                ['Lipsticw', 814, 954],
+                ['Lipsticq', 814, 654],
+                ['Lipstickf',314, 154],
+              ]
+            };
+            
+            // create column chart
+            var chart = anychart.column();
+    
+            // set chart data
+            chart.data(chartData);
+                
+            chart.background({fill: "#fff 0.0"});   
+
+            // turn on chart animation
+            chart.animation(true);
+    
+            chart.yAxis().labels().format('${%Value}{groupsSeparator: }');
+    
+            // set titles for Y-axis
+            chart.yAxis().title('Revenue');
+    
+            chart
+              .labels()
+              .enabled(true)
+              .position('center-top')
+              .anchor('center-bottom')
+              .format('${%Value}{groupsSeparator: }');
+            chart.hovered().labels(false);
+    
+            // turn on legend and tune it
+            chart.legend().enabled(true).fontSize(13).padding([0, 0, 20, 0]);
+    
+            // interactivity settings and tooltip position
+            chart.interactivity().hoverMode('single');
+    
+            chart
+              .tooltip()
+              .positionMode('point')
+              .position('center-top')
+              .anchor('center-bottom')
+              .offsetX(0)
+              .offsetY(5)
+              .titleFormat('{%X}')
+              .format('{%SeriesName} : ${%Value}{groupsSeparator: }');
+    
+            // set container id for the chart
+            chart.container('container');    
+            // initiate chart drawing
+            chart.draw();        
           });
 
           anychart.onDocumentReady(function () {
@@ -349,6 +649,56 @@
         ];
       }
     
+      anychart.onDocumentReady(function () {
+        // create bar chart
+        var chart = anychart.bar();
+
+        chart.animation(true);
+
+        chart.padding([10, 40, 5, 20]);
+
+        chart.title('Top 10 Cosmetic Products by Revenue');
+
+        // create bar series with passed data
+        var series = chart.bar([
+          ['Eyeshadows', '249980'],
+          ['Eyeliner', '213210'],
+          ['Eyebrow pencil', '170670'],
+          ['Nail polish', '143760'],
+          ['Lipstick', '128000'],
+          ['Lip gloss', '110430'],
+          ['Mascara', '102610'],
+          ['Foundation', '94190'],
+          ['Rouge', '80540'],
+          ['Powder', '53540']
+        ]);
+
+        // set tooltip settings
+        series
+          .tooltip()
+          .position('right')
+          .anchor('left-center')
+          .offsetX(5)
+          .offsetY(0)
+          .titleFormat('{%X}')
+          .format('${%Value}');
+
+        // set yAxis labels formatter
+        chart.yAxis().labels().format('{%Value}{groupsSeparator: }');
+
+        // set titles for axises
+        chart.xAxis().title('Products by Revenue');
+        chart.yAxis().title('Revenue in Dollars');
+        chart.interactivity().hoverMode('by-x');
+        chart.tooltip().positionMode('point');
+        // set scale minimum
+        chart.yScale().minimum(0);
+
+        // set container id for the chart
+        chart.container('barra');
+        // initiate chart drawing
+        chart.draw();
+      });
     </script>
     </body>
     </html>
